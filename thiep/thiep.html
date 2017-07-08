@@ -1,0 +1,210 @@
+<html>
+	<head>
+		<title></title>
+		<meta charser="utf-8" />
+		<style>
+			*{text-decoration: none;color:yellow;}
+			body { background-color:#333;display: flex;
+  justify-content: center; color:yellow;}
+			#snow{
+			background: none;
+			font-family: Androgyne;
+			background-image: url('http://www.wearewebstars.dk/codepen/img/s1.png'), url('http://www.wearewebstars.dk/codepen/img//s2.png'), url('http://www.wearewebstars.dk/codepen/img//s3.png');
+			height: 100%;
+			left: 0;
+			position: absolute;
+			top: 0;
+			width: 100%;
+			z-index:1;
+			-webkit-animation: snow 10s linear infinite;
+			-moz-animation: snow 10s linear infinite;
+			-ms-animation: snow 10s linear infinite;
+			animation: snow 10s linear infinite;
+			}
+			@keyframes snow {
+			0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
+			50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
+			100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
+			}
+			@-moz-keyframes snow {
+			0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
+			50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
+			100% {background-position: 400px 1000px, 200px 400px, 100px 300px;}
+			}
+			@-webkit-keyframes snow {
+			0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
+			50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
+			100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
+			}
+			@-ms-keyframes snow {
+			0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
+			50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
+			100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
+			}
+			.all{
+				
+				
+			}
+			
+			  
+  
+
+
+/* DEMO-SPECIFIC STYLES */
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+@keyframes typinghai {
+	0%{width: 0;}
+  50%{width: 0;}
+  100%{ width: 1000px;}
+
+}
+@keyframes typingba {
+	0%{width: 0;}
+  50%{width: 0;}
+  100%{ width: 100%;}
+}
+.typewriter p {
+  color: #fff;
+  font-family: monospace;
+  overflow: hidden; 
+  border-right: .15em odsli orange ; 
+  white-space: nowrap; 
+  margin: 0 auto; 
+  letter-spacing: .15em; 
+  animation: 
+    typing 5s steps(30, end),
+    blink-caret .10s step-end infinite;
+    text-align: center;
+    color:lime;
+    font-size: 19px;
+    padding:14px;
+   
+}
+.typewriter{
+	padding-top:70px; 
+}
+
+.typewriter p:nth-child(2){
+	animation: typinghai 10s steps(30, end),
+    blink-caret .10s step-end infinite;
+    color: yellow;
+}
+.typewriter p:nth-child(3){
+	animation: typingba 17s steps(30, end),
+    blink-caret .10s step-end infinite;
+    color:white;
+}
+@keyframes blink-caret {
+  
+  to{opacity: .0}
+  50% { border-color: orange }
+}
+h1{
+	text-align: center;
+	font-size:40px;
+	color:yellow;
+	padding-bottom:10px;
+
+}
+.background {
+	background-image: url(http://www.hallmark.com/dw/image/v2/AALB_PRD/on/demandware.static/-/Sites-hallmark-master/default/dw41714e32/images/finished-goods/stick-birthday-root-349zzb5191_1470_2.jpg?sw=709.5)  ;
+	background-repeat: no-repeat;
+	width:1000PX ;
+	height: 420px;
+	background-size: 1000px 500px;
+}
+
+
+		</style>
+		<script>
+		var TxtType = function(el, toRotate, period) {
+        this.toRotate = toRotate;
+        this.el = el;
+        this.loopNum = 0;
+        this.period = parseInt(period, 10) || 2000;
+        this.txt = '';
+        this.tick();
+        this.isDeleting = false;
+    };
+
+    TxtType.prototype.tick = function() {
+        var i = this.loopNum % this.toRotate.length;
+        var fullTxt = this.toRotate[i];
+
+        if (this.isDeleting) {
+        this.txt = fullTxt.substring(0, this.txt.length - 1);
+        } else {
+        this.txt = fullTxt.substring(0, this.txt.length + 1);
+        }
+
+        this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+        var that = this;
+        var delta = 200 - Math.random() * 100;
+
+        if (this.isDeleting) { delta /= 2; }
+
+        if (!this.isDeleting && this.txt === fullTxt) {
+        delta = this.period;
+        this.isDeleting = true;
+        } else if (this.isDeleting && this.txt === '') {
+        this.isDeleting = false;
+        this.loopNum++;
+        delta = 500;
+        }
+
+        setTimeout(function() {
+        that.tick();
+        }, delta);
+    };
+
+    window.onload = function() {
+        var elements = document.getElementsByClassName('typewrite');
+        for (var i=0; i<elements.length; i++) {
+            var toRotate = elements[i].getAttribute('data-type');
+            var period = elements[i].getAttribute('data-period');
+            if (toRotate) {
+              new TxtType(elements[i], JSON.parse(toRotate), period);
+            }
+        }
+        // INJECT CSS
+        var css = document.createElement("style");
+        css.type = "text/css";
+        css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+        document.body.appendChild(css);
+    };
+		</script>
+	</head>
+	<body>
+		<div id="snow"></div>
+
+		<div class="all">
+			<h1 style="text-decoration: none;">
+  <a href="" class="typewrite" data-period="2000" data-type='[ "HAPPY BIRTH DAY .", "SORRY FOR THE LATE.", "BUT I KNOW THAT ENOUGH 4 LOVE.", "I Love YOU." ]'>
+    <span class="wrap"></span>
+  </a>
+</h1>
+			<div class="background" style="">
+			<div class="typewriter">
+			<p>Wishing you birthday far from house but still happy. Try to see to future.</p>
+			<p>
+			Wishing you a happy birthday. Praying you luckily
+			</p>
+			<p>With each year I love you more and more. Happy birthday sweet love!
+			</p>
+			</div>
+			</div>
+			<audio autoplay>
+  <source src="a.mp3" type="audio/mp3">
+</audio>
+		<img src=""/>
+		</div>
+
+		
+	 
+	</body>
+</html>
